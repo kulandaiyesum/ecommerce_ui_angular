@@ -37,9 +37,9 @@ export class ProductService {
 
   /**
    * function checkout
-   * @param isSingleProductCheckout 
-   * @param productId 
-   * @returns 
+   * @param isSingleProductCheckout
+   * @param productId
+   * @returns
    */
   public getProductDetails(isSingleProductCheckout: any, productId: any) {
     return this.httpClient.get<Product[]>(
@@ -50,15 +50,18 @@ export class ProductService {
     );
   }
 
-  public placeOrder(orderDetails: OrderDetails) {
+  public placeOrder(
+    orderDetails: OrderDetails,
+    isSingleProductCheckout: boolean
+  ) {
     return this.httpClient.post(
-      'http://localhost:9090/placeOrder',
+      'http://localhost:9090/placeOrder/' + isSingleProductCheckout,
       orderDetails
     );
   }
 
   public addToCart(productId: number) {
-    return this.httpClient.get('http://localhost:9090/addToCart/'+ productId);
+    return this.httpClient.get('http://localhost:9090/addToCart/' + productId);
   }
 
   public getCartDetals() {

@@ -12,6 +12,7 @@ import { ProductService } from '../_services/product.service';
 })
 export class BuyProductComponent implements OnInit {
   productDetails: Product[] = [];
+  isSingleProductCheckout: any ; // boolean false or true
   orderDetails: OrderDetails = {
     fullName: '',
     fullAddress: '',
@@ -27,6 +28,10 @@ export class BuyProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.productDetails = this.activatedRoute.snapshot.data['productDetails'];
+    this.isSingleProductCheckout = this.activatedRoute.snapshot.paramMap.get(
+      'isSingleProductCheckout'
+    );
+    console.log(this.isSingleProductCheckout, typeof this.isSingleProductCheckout);
     this.productDetails.forEach((x) =>
       this.orderDetails.orderProductQuantityList.push({
         productId: x.productId,
@@ -37,16 +42,18 @@ export class BuyProductComponent implements OnInit {
     console.log(this.orderDetails);
   }
   public placeOrder(orderForm: NgForm) {
-    this.productService.placeOrder(this.orderDetails).subscribe(
-      (resp) => {
-        console.log(resp);
-        orderForm.reset();
-        this.route.navigate(['/orderConfirm']);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    this.productService
+      .placeOrder(this.orderDetails, this.isSingleProductCheckout)
+      .subscribe(
+        (resp) => {
+          console.log(resp);
+          orderForm.reset();
+          this.route.navigate(['/orderConfirm']);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 
   getQuantityForProduct(productId: number) {
