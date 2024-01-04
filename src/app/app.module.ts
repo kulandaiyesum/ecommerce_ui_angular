@@ -33,7 +33,10 @@ import { BuyProductComponent } from './buy-product/buy-product.component';
 import { OrderConformationComponent } from './order-conformation/order-conformation.component';
 import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
-
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,8 @@ import { CartComponent } from './cart/cart.component';
     OrderConformationComponent,
     RegisterComponent,
     CartComponent,
+    MyOrdersComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +74,8 @@ import { CartComponent } from './cart/cart.component';
     MatTableModule,
     MatIconModule,
     MatDialogModule,
+    MatPaginatorModule,
+    MatButtonToggleModule,
   ],
   providers: [
     AuthGuard,
