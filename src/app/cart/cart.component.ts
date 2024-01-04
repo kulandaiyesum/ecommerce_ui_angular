@@ -13,6 +13,7 @@ export class CartComponent implements OnInit {
     'description',
     'price',
     'discountedPrice',
+    'action',
   ];
   constructor(private productService: ProductService, private router: Router) {}
   cartDetails = [];
@@ -23,7 +24,6 @@ export class CartComponent implements OnInit {
   getCartDetails() {
     this.productService.getCartDetals().subscribe(
       (res: any) => {
-        console.log(res);
         this.cartDetails = res;
       },
       (err: any) => {
@@ -47,5 +47,16 @@ export class CartComponent implements OnInit {
     //     console.log(err);
     //   }
     // );
+  }
+  deleteItem(cartId: number) {
+    console.log(cartId);
+    this.productService.deleteCartItem(cartId).subscribe(
+      (res: any) => {
+        this.getCartDetails();
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
   }
 }
